@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import ExpenseList from './components/ExpenseList/ExpenseList'
+import NewExpense from './components/NewExpense/NewExpense'
 
 function App() {
 
@@ -24,12 +25,18 @@ function App() {
       amount: 450,
       date: new Date(2021, 5, 12),
     },
-  ];  
+  ];
 
-  const expenseList =  <ExpenseList expenses={expenseArr}></ExpenseList>;
+  const addExpenseHandler = expenseData => {
+    console.log('App get expense');
+    console.log(expenseData);
+
+  }
+
+  const expenseList = <ExpenseList expenses={expenseArr}></ExpenseList>;
   return (
     <div className="App">
-      <h1>lets start</h1>
+      <NewExpense onAddExpense={addExpenseHandler}/>
       {expenseList}
     </div>
   );
