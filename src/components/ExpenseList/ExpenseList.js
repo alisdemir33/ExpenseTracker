@@ -14,7 +14,7 @@ const ExpenseList = (props) => {
     })
 
     return <Card className="expenses">
-       <Header text ="Expense List"></Header>
+       <Header count={props.listCount} text ="Expense List"></Header>
         {expenseList}
         </Card>;
 }

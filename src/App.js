@@ -2,9 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import ExpenseList from './components/ExpenseList/ExpenseList'
 import NewExpense from './components/NewExpense/NewExpense'
+import ExpensesFilter from './components/ExpensesFilter/ExpensesFilter'
+import { useState } from 'react';
 
 function App() {
-
   const expenseArr = [
     {
       id: 'e1',
@@ -23,9 +24,12 @@ function App() {
       id: 'e4',
       title: 'New Desk (Wooden)',
       amount: 450,
-      date: new Date(2021, 5, 12),
+      date: new Date(2019, 5, 12),
     },
   ];
+
+  const [expenseList, setExpenseList] = useState(expenseArr);
+
 
   const addExpenseHandler = expenseData => {
     console.log('App get expense');
@@ -33,11 +37,24 @@ function App() {
 
   }
 
-  const expenseList = <ExpenseList expenses={expenseArr}></ExpenseList>;
+  const filterExpensesHandler = (filterValue) => {
+    console.log('Filter by' + filterValue);
+
+    if (filterValue == 'none')
+      setExpenseList(expenseArr)
+    else {
+      const filteredList = expenseArr.filter((exp) => {
+        return exp.date.getFullYear() == filterValue
+      })
+      setExpenseList(filteredList);
+    }    
+  }
+
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpenseHandler}/>
-      {expenseList}
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <ExpensesFilter onFilterChange={filterExpensesHandler}></ExpensesFilter>
+      <ExpenseList listCount={expenseList.length} expenses={expenseList}></ExpenseList>;
     </div>
   );
 }
