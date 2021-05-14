@@ -7,34 +7,40 @@ import ExpensesFilter from '../ExpensesFilter/ExpensesFilter'
 
 const ExpenseList = (props) => {
 
-    const [filterValue,setFilterValue] =useState('');
-    const [filteredExpenseList, setFilteredExpenseList] = useState(props.expenses);
+    const [filterValue,setFilterValue] =useState('none');
+   // const [filteredExpenseList, setFilteredExpenseList] = useState(props.expenses);
   
     const filterExpensesHandler = (filterValueParam) => {
        
         console.log('Filter by' + filterValueParam);
         setFilterValue(filterValueParam)
     
-        if (filterValueParam == 'none')
-        setFilteredExpenseList(props.expenses)
-        else {
-          const filteredList = props.expenses.filter((exp) => {
-            return exp.date.getFullYear() == filterValueParam
-          })
-          console.log('fl:'+filteredList);
-          setFilteredExpenseList(filteredList);
-        }    
+          
       }
+//;debugger
+      let filteredList=[];
+      if (filterValue == 'none')
+      filteredList=props.expenses;
+      else {
+         filteredList = props.expenses.filter((exp) => {
+          return exp.date.getFullYear() == filterValue
+        })
+       // console.log('fl:'+filteredList);
+      //  setFilteredExpenseList(filteredList);
+      } 
 
   
-    const expenseList = filteredExpenseList.map((currExpense) => {
+    const expenseList = filteredList.map((currExpense) => {
         return (
             <ExpenseItem
+            key={currExpense.id}
                 exDate={currExpense.date}
                 exTitle={currExpense.title}
                 exPrice={currExpense.amount}>
             </ExpenseItem>);
     })
+
+    console.log('RENDERED List'+expenseList.length)
 
     return <Card className="expenses">
        <Header count={expenseList.length} text ="Expense List"></Header>

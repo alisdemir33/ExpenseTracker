@@ -5,7 +5,6 @@ import Card from '../UI/Card'
 import './ExpensesFilter.css';
 
 const ExpensesFilter = (props) => {
-  
  
 
   const filterTheExpenses = (event) =>{
