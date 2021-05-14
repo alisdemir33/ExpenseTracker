@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import ExpenseList from './components/ExpenseList/ExpenseList'
 import NewExpense from './components/NewExpense/NewExpense'
-import ExpensesFilter from './components/ExpensesFilter/ExpensesFilter'
+
 import { useState } from 'react';
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
     },
   ];
 
-  const [expenseList, setExpenseList] = useState(expenseArr);
+  
 
 
   const addExpenseHandler = expenseData => {
@@ -37,24 +37,12 @@ function App() {
 
   }
 
-  const filterExpensesHandler = (filterValue) => {
-    console.log('Filter by' + filterValue);
-
-    if (filterValue == 'none')
-      setExpenseList(expenseArr)
-    else {
-      const filteredList = expenseArr.filter((exp) => {
-        return exp.date.getFullYear() == filterValue
-      })
-      setExpenseList(filteredList);
-    }    
-  }
+  
 
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpenseHandler} />
-      <ExpensesFilter onFilterChange={filterExpensesHandler}></ExpensesFilter>
-      <ExpenseList listCount={expenseList.length} expenses={expenseList}></ExpenseList>;
+      <NewExpense onAddExpense={addExpenseHandler} />    
+      <ExpenseList  expenses={expenseArr}></ExpenseList>;
     </div>
   );
 }

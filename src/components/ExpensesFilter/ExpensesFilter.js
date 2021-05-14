@@ -5,22 +5,22 @@ import Card from '../UI/Card'
 import './ExpensesFilter.css';
 
 const ExpensesFilter = (props) => {
-  const [filterValue,setFilterValue] =useState('');
+  
+ 
 
   const filterTheExpenses = (event) =>{
-   event.preventDefault();
-   console.log(event.target.value)
-   setFilterValue(event.target.value)
+    event.preventDefault();
+    console.log(event.target.value)
+   // setFilterValue(event.target.value)
     props.onFilterChange(event.target.value);
-
   }
 
   return (
    <Card className="expenses">
    <div className='expenses-filter'>
       <div className='expenses-filter__control'>
-        <label>Filter by year : {filterValue}</label>
-        <select value={filterValue} onChange={filterTheExpenses}>
+        <label>Filter by year : {props.filterValue}</label>
+        <select value={props.filterVal} onChange={filterTheExpenses}>
         <option value='none'>None</option>
           <option value='2022'>2022</option>
           <option value='2021'>2021</option>
