@@ -17,7 +17,7 @@ const ExpenseList = (props) => {
     
           
       }
-//;debugger
+
       let filteredList=[];
       if (filterValue == 'none')
       filteredList=props.expenses;
@@ -25,8 +25,7 @@ const ExpenseList = (props) => {
          filteredList = props.expenses.filter((exp) => {
           return exp.date.getFullYear() == filterValue
         })
-       // console.log('fl:'+filteredList);
-      //  setFilteredExpenseList(filteredList);
+     
       } 
 
   

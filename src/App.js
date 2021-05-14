@@ -40,9 +40,7 @@ function App() {
       return [expenseData,...prevState ];
     });
 
-    console.log(expenseList);
-
-    
+    console.log(expenseList);    
 
   }
 
