@@ -37,7 +37,7 @@ const ExpenseList = (props) => {
     })
 
     return <Card className="expenses">
-       <Header count={props.listCount} text ="Expense List"></Header>
+       <Header count={expenseList.length} text ="Expense List"></Header>
        <ExpensesFilter filterVal={filterValue} onFilterChange={filterExpensesHandler}></ExpensesFilter>
         {expenseList}
         </Card>;
