@@ -1,5 +1,5 @@
 import './ExpenseItem.css'
-import ExpenseDate from '../ExpenseDate/ExpenseDate'
+import ExpenseDate from './ExpenseDate'
 import Card from '../UI/Card'
 import { useState } from 'react';
 
@@ -10,7 +10,8 @@ const ExpenseItem = (props) => {
     const clickHandler = () => {
         setTitle('changed');
     }
-        return (
+    return (
+        <li>
             <Card className="expense-item">
                 <ExpenseDate date={props.exDate} ></ExpenseDate>
                 <div className="expense-item__description">
@@ -19,7 +20,8 @@ const ExpenseItem = (props) => {
                 <div className="expense-item__price">{props.exPrice}try</div>
                 <button className="button" onClick={clickHandler}> Button </button>
             </Card>
-        );
-    }
+        </li>
+    );
+}
 
 export default ExpenseItem;

@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import ExpenseItem from '../ExpenseItem/ExpenseItem';
-import './ExpenseList.css' ;
+import './Expenses.css' ;
 import Header from '../Header/Header'
 import Card from '../UI/Card'
 import ExpensesFilter from '../ExpensesFilter/ExpensesFilter'
+import ExpensesChart from './ExpensesChart'
+import ExpenseList from './ExpenseList'
 
-const ExpenseList = (props) => {
+const Expenses = (props) => {
 
     const [filterValue,setFilterValue] =useState('none');
    // const [filteredExpenseList, setFilteredExpenseList] = useState(props.expenses);
   
-    const filterExpensesHandler = (filterValueParam) => {
-       
+    const filterExpensesHandler = (filterValueParam) => {       
         console.log('Filter by' + filterValueParam);
-        setFilterValue(filterValueParam)
-    
-          
+        setFilterValue(filterValueParam)          
       }
 
       let filteredList=[];
@@ -24,27 +22,17 @@ const ExpenseList = (props) => {
       else {
          filteredList = props.expenses.filter((exp) => {
           return exp.date.getFullYear() == filterValue
-        })
-     
+        })     
       } 
 
-  
-    const expenseList = filteredList.map((currExpense) => {
-        return (
-            <ExpenseItem
-            key={currExpense.id}
-                exDate={currExpense.date}
-                exTitle={currExpense.title}
-                exPrice={currExpense.amount}>
-            </ExpenseItem>);
-    })
+      let expenseContent=<ExpenseList list={filteredList}></ExpenseList>
 
-    console.log('RENDERED List'+expenseList.length)
 
     return <Card className="expenses">
-       <Header count={expenseList.length} text ="Expense List"></Header>
+       <Header count={filteredList.length} text ="Expense List"></Header>
        <ExpensesFilter filterVal={filterValue} onFilterChange={filterExpensesHandler}></ExpensesFilter>
-        {expenseList}
+        <ExpensesChart filteredExpenses={filteredList}></ExpensesChart>
+        {expenseContent}
         </Card>;
 }
-export default ExpenseList;
+export default Expenses;

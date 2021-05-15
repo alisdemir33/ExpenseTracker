@@ -1,8 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import ExpenseList from './components/ExpenseList/ExpenseList'
+import Expenses from './components/Expenses/Expenses'
 import NewExpense from './components/NewExpense/NewExpense'
 import { useState } from 'react';
+
 
 const expenseArr = [
   {
@@ -39,17 +40,13 @@ function App() {
     setExpenseList( (prevState)=>{
       return [expenseData,...prevState ];
     });
-
-    console.log(expenseList);    
-
-  }
-
-  
+    console.log(expenseList);
+  }   
 
   return (
     <div className="App">
-      <NewExpense onAddExpense={addExpenseHandler} />    
-      <ExpenseList  expenses={expenseList}></ExpenseList>;
+      {<NewExpense  onAddExpense={addExpenseHandler} />}        
+      <Expenses expenses={expenseList}></Expenses>;
     </div>
   );
 }

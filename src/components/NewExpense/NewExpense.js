@@ -1,28 +1,40 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './NewExpense.css'
 import ExpenseForm from './ExpenseForm'
+import FormVisibleToggle from './FormVisibleToggle'
 
-const NewExpense = (props) =>{
+const NewExpense = (props) => {
 
-    const saveExpenseData =(enteredExpenseData) =>{
-        const expenseData={
+    const [formVisible, setFormVisible] = useState(false);
+
+    const saveExpenseData = (enteredExpenseData) => {
+        const expenseData = {
             ...enteredExpenseData,
-            id:Math.random().toString()
+            id: Math.random().toString()
         }
         console.log('NewExpense id added enteredExpenseData')
-        console.log(expenseData)        
+        console.log(expenseData)
 
         props.onAddExpense(expenseData);
 
     }
 
-    return(
-<div className="new-expense">
-    <ExpenseForm onSaveExpenseData={saveExpenseData}>
+    const onSetFormVisible = () => {
+        setFormVisible((prevState) => {
+            return !formVisible
+        })
+    }
 
-    </ExpenseForm>
-</div>
+    let formToShow = formVisible ?
+        (<ExpenseForm onToggle={onSetFormVisible} onSaveExpenseData={saveExpenseData}/> )      
+        :
+        (<FormVisibleToggle onToggle={onSetFormVisible}></FormVisibleToggle>);
 
+
+    return (
+        <div className="new-expense">
+            {formToShow}
+        </div>
     );
 
 }
